@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Post</title>
+</head>
+<body>
+    Make a Post! <br>
+    To make a post, enter your username and what you want to say, then click submit
+        <form name="form" action="CreatePosts.php" method="post">
+            <div>
+                <input type="text" id="userName" placeholder="username" name="userName" >
+                <label for="userName"></label>
+            </div>
+            <div>
+                <input type="text" id="userPost" placeholder="comment" name="userpost" >
+                <label for="userPost"></label>
+            </div>
+            <input type="submit" value="submit">
+        </form>
+</body>
+</html>

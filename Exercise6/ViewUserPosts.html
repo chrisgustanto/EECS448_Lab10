@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User Posts</title>
+</head>
+<body>
+    Choose a user from list of users to view their posts
+        <form action="ViewUserPosts.php" method="post">
+            <select name="usrname" id="usrname">
+                <?php
+                $servername = "mysql.eecs.ku.edu";
+                $username = "c356g399";
+                $password = "Ahk7yeek";
+                $dbname = "c356g399";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+                }
+
+                //sql command
+                $sql = 'SELECT user_id FROM Users';
+
+                //displays the users id as an option
+                //only displays the users who have made a post
+                if($result = $conn->query($sql)){
+                    while($row = $result->fetch_assoc()){
+                        echo "<option value='" . $row["user_id"] . "'>" . $row["user_id"] . "</option>";
+                    }
+                }else{
+                    echo "Bad Query";
+                }
+                //close connection
+                $conn->close();
+                ?>
+            </select>
+        <input type="submit" name="submit" >
+        </form>
+</body>
+</html>

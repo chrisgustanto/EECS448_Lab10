@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Delete Posts</title>
+</head>
+<body>
+    Check the Posts you'd like to delete, then click on the submit button.
+    <form action="DeletePost.php" method="post">
+        <table class="dTable">
+            <tr><th>Delete?</th><th>Author</th><th>Posts</th></tr>
+            
+            <?php
+                $servername = "mysql.eecs.ku.edu";
+                $username = "c356g399";
+                $password = "Ahk7yeek";
+                $dbname = "c356g399";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+                }
+                //sql command
+                $sql = "SELECT * FROM Posts";
+               //create a table row that has a checkbox, the user_id, and the content of the post
+                if($result = $conn->query($sql)){
+                    while($row = $result->fetch_assoc()){
+                        echo "<tr><td><input type='checkbox' name='toDelete[]' value='" . $row["post_id"] . "'></td><td>" . $row["author_id"] . "</td><td>" . $row["content"] . "</td></tr>";
+                    }
+                    $result->free();
+                }else{
+                    echo "<tr><td>No posts have been made yet!</td></tr>";
+                }
+
+                //close connection
+                $conn->close();
+                ?>
+        </table>
+        <button type="submit" value="submit">Delete</button>
+    </form>
+</body>
+</html>
